@@ -1,0 +1,23 @@
+{
+  "name": "com.whitesharx.tosx",
+  "version": "0.5.0",
+  "displayName": "ToSx",
+  "description": "Native alerts for ToS, PP, GDPR",
+  "unity": "2019.1",
+  "keywords": [
+    "Unity",
+    "GDPR",
+    "Licensing"
+  ],
+  "author": {
+    "name": "Sergey Ivonchik",
+    "email": "si@whitesharx.com",
+    "url": "https://whitesharx.com"
+  },
+  "homepage": "https://github.com/whitesharx/tosx",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/whitesharx/tosx.git"
+  },
+  "license": "MIT"
+}

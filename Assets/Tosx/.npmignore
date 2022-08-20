@@ -1,0 +1,13 @@
+Scenes/
+Scenes.meta
+
+*_tests/
+*_tests.meta
+
+.DS_Store
+.Spotlight-V100
+.Trashes
+.txt
+.log
+.tmp
+.bk
