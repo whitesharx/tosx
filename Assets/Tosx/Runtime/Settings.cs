@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Sergey Ivonchik
+﻿// Copyright (c) 2022 Sergey Ivonchik
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,19 +18,37 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
 
-using System;
-using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Tosx {
-  public class Alert {
-    private readonly Settings settings;
-
-    public Alert(Settings settings) => this.settings = settings;
-
-    public void Display(Action onCloseCallback) { }
-
-    public Task DisplayAsync() {
-      return Task.CompletedTask;
+  public class Settings {
+    public Settings(GameObject parent, string titleText, string messageTextFormat,
+        string termsOfServiceText, string privacyPolicyText, string termsOfServiceUrl,
+        string privacyPolicyUrl, string actionText) {
+      Parent = parent;
+      TitleText = titleText;
+      MessageTextFormat = messageTextFormat;
+      TermsOfServiceText = termsOfServiceText;
+      PrivacyPolicyText = privacyPolicyText;
+      TermsOfServiceUrl = termsOfServiceUrl;
+      PrivacyPolicyUrl = privacyPolicyUrl;
+      ActionText = actionText;
     }
+
+    public GameObject Parent { get; private set; }
+
+    public string TitleText { get; private set; }
+
+    public string MessageTextFormat { get; private set; }
+
+    public string TermsOfServiceText { get; private set; }
+
+    public string PrivacyPolicyText { get; private set; }
+
+    public string TermsOfServiceUrl { get; private set; }
+
+    public string PrivacyPolicyUrl { get; private set; }
+
+    public string ActionText { get; private set; }
   }
 }
