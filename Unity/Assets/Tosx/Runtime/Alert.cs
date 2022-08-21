@@ -20,6 +20,7 @@
 
 using System;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Tosx {
   public class Alert {
@@ -31,6 +32,18 @@ namespace Tosx {
 
     public Task DisplayAsync() {
       return Task.CompletedTask;
+    }
+
+    private void DisplayAndroidImpl() {
+      var jsonArgs = settings.AsJson();
+
+      Debug.Log($"args: {jsonArgs}");
+
+      using var clazz = new AndroidJavaClass("com.whitesharx.tosx.AlertDialogFragment");
+
+
+      // clazz.CallStatic();
+
     }
   }
 }

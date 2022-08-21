@@ -18,37 +18,48 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
 
+// ReSharper disable ConvertToAutoPropertyWithPrivateSetter
+
+using System;
 using UnityEngine;
 
 namespace Tosx {
-  public class Settings {
-    public Settings(GameObject parent, string titleText, string messageTextFormat,
-        string termsOfServiceText, string privacyPolicyText, string termsOfServiceUrl,
-        string privacyPolicyUrl, string actionText) {
-      Parent = parent;
-      TitleText = titleText;
-      MessageTextFormat = messageTextFormat;
-      TermsOfServiceText = termsOfServiceText;
-      PrivacyPolicyText = privacyPolicyText;
-      TermsOfServiceUrl = termsOfServiceUrl;
-      PrivacyPolicyUrl = privacyPolicyUrl;
-      ActionText = actionText;
+  [Serializable]
+  public partial class Settings {
+    private string titleText;
+    private string messageTextFormat;
+    private string termsOfServiceText;
+    private string privacyPolicyText;
+    private string termsOfServiceUrl;
+    private string privacyPolicyUrl;
+    private string actionText;
+
+    public Settings(string titleText, string messageTextFormat,
+      string termsOfServiceText, string privacyPolicyText, string termsOfServiceUrl,
+      string privacyPolicyUrl, string actionText) {
+      this.titleText = titleText;
+      this.messageTextFormat = messageTextFormat;
+      this.termsOfServiceText = termsOfServiceText;
+      this.privacyPolicyText = privacyPolicyText;
+      this.termsOfServiceUrl = termsOfServiceUrl;
+      this.privacyPolicyUrl = privacyPolicyUrl;
+      this.actionText = actionText;
     }
 
-    public GameObject Parent { get; private set; }
+    public string TitleText => titleText;
+    public string MessageTextFormat => messageTextFormat;
+    public string TermsOfServiceText => termsOfServiceText;
+    public string PrivacyPolicyText => privacyPolicyText;
+    public string TermsOfServiceUrl => termsOfServiceUrl;
+    public string PrivacyPolicyUrl => privacyPolicyUrl;
+    public string ActionText => actionText;
+  }
 
-    public string TitleText { get; private set; }
+  public partial class Settings {
+    public Settings FromJson(string jsonString) => JsonUtility.FromJson<Settings>(jsonString);
+  }
 
-    public string MessageTextFormat { get; private set; }
-
-    public string TermsOfServiceText { get; private set; }
-
-    public string PrivacyPolicyText { get; private set; }
-
-    public string TermsOfServiceUrl { get; private set; }
-
-    public string PrivacyPolicyUrl { get; private set; }
-
-    public string ActionText { get; private set; }
+  public static class SettingsExtensions {
+    public static string AsJson(this Settings settings) => JsonUtility.ToJson(settings);
   }
 }

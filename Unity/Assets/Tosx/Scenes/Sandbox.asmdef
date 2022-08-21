@@ -1,0 +1,16 @@
+{
+    "name": "Sandbox",
+    "rootNamespace": "Tosx.Sandbox",
+    "references": [
+        "GUID:4bb3320f584cc424cab8d002a61cb70b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
