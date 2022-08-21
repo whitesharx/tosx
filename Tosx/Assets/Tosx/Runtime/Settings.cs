@@ -26,12 +26,25 @@ using UnityEngine;
 namespace Tosx {
   [Serializable]
   public partial class Settings {
+    [SerializeField]
     private string titleText;
+
+    [SerializeField]
     private string messageTextFormat;
+
+    [SerializeField]
     private string termsOfServiceText;
+
+    [SerializeField]
     private string privacyPolicyText;
+
+    [SerializeField]
     private string termsOfServiceUrl;
+
+    [SerializeField]
     private string privacyPolicyUrl;
+
+    [SerializeField]
     private string actionText;
 
     public Settings(string titleText, string messageTextFormat,

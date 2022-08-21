@@ -5,6 +5,7 @@ namespace Tosx.Sandbox {
   public class SandboxBehaviour : MonoBehaviour {
     [UsedImplicitly]
     private async void Start() {
+      Debug.Log("[Sandbox]: Start...");
 
       var title = "Warning!";
       var message = "By tapping \"OK\" you accept our {_tos_var} and confirm that you've read {_pp_var}.";

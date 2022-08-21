@@ -41,4 +41,6 @@ Assets/Plugins/Editor/JetBrains
 Logs/
 
 Build-*/
+Builld-*/
+
 *_tests/

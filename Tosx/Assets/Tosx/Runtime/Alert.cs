@@ -31,6 +31,10 @@ namespace Tosx {
     public void Display(Action onCloseCallback) { }
 
     public Task DisplayAsync() {
+      Debug.Log("[Alert]: DisplayAsync()");
+
+      DisplayAndroidImpl();
+
       return Task.CompletedTask;
     }
 
@@ -39,11 +43,37 @@ namespace Tosx {
 
       Debug.Log($"args: {jsonArgs}");
 
-      using var clazz = new AndroidJavaClass("com.whitesharx.tosx.AlertDialogFragment");
+      using var alertClazz = new AndroidJavaClass("com.whitesharx.tosx.AlertDialogFragment");
+      using var alertObject = alertClazz.CallStatic<AndroidJavaObject>("newInstanceUnsafe", jsonArgs, "TosxObject");
 
+      Debug.Log($"obj: {alertObject}");
+      LogName(alertObject);
 
-      // clazz.CallStatic();
+      using var playerClazz = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
 
+      Debug.Log($"playerClazz: {playerClazz}");
+      LogName(playerClazz);
+
+      using var activityObject = playerClazz.GetStatic<AndroidJavaObject>("currentActivity");
+
+      Debug.Log($"activityObject: {activityObject}");
+      LogName(activityObject);
+
+      using var fragmentManagerObject = activityObject.Call<AndroidJavaObject>("getFragmentManager");
+
+      Debug.Log($"fragmentManagerObject: {fragmentManagerObject}");
+      LogName(fragmentManagerObject);
+
+      // fragmentManagerObject.Call("show", alertObject, "tosx-fragment");
+
+      alertObject.Call("show", fragmentManagerObject, "tosx-fragment");
+    }
+
+    private void LogName(AndroidJavaObject javaObject) {
+      // using var objectClazz = javaObject.Call<AndroidJavaClass>("getClass");
+      // var clazzName = objectClazz.Call<string>("getName");
+
+      // Debug.Log($"[Java Class]: {clazzName}");
     }
   }
 }
