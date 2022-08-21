@@ -4,25 +4,18 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.Debug;
-import android.os.PatternMatcher;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.SpannedString;
 import android.text.method.LinkMovementMethod;
-import android.text.style.URLSpan;
-import android.text.util.Linkify;
+import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.Patterns;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.util.TypedValue;
 import android.widget.TextView;
 
 import org.json.JSONException;
-
-import java.util.regex.Matcher;
 
 @SuppressWarnings("deprecation")
 public class AlertDialogFragment extends DialogFragment {
@@ -67,45 +60,34 @@ public class AlertDialogFragment extends DialogFragment {
 
     String titleText = settings.getTitleText();
     String actionText = settings.getActionText();
-    String safeActionText = null != actionText && !actionText.isEmpty() ? actionText : "OK";
+
+    String safeActionText = null != actionText && !actionText.isEmpty()
+        ? actionText : getActivity().getString(android.R.string.ok);
 
     if (null != titleText && !titleText.isEmpty()) {
       builder.setTitle(titleText);
     }
 
+    TextView textView = new TextView(getActivity());
+    TypedValue outValue = new TypedValue();
 
-    Spanned message = BuildMessage(settings);
+    Resources.Theme theme = getActivity().getTheme();
+    DisplayMetrics metrics = getActivity().getResources().getDisplayMetrics();
 
-    Object[] objSpans = message.getSpans(0, message.length(), Object.class);
+    theme.resolveAttribute(android.R.attr.dialogPreferredPadding, outValue, true);
+    int padding = TypedValue.complexToDimensionPixelSize(outValue.data, metrics);
 
-    for (Object span : objSpans) {
-      Log.d(DEBUG_TAG, "span: " + span);
+    textView.setTextAppearance(getActivity(), android.R.style.TextAppearance_Medium);
+    textView.setText(BuildMessage(settings));
+    textView.setMovementMethod(LinkMovementMethod.getInstance());
+    textView.setPadding(padding, padding, padding, padding);
 
-      if (span instanceof URLSpan) {
-        URLSpan urlSpan = (URLSpan) span;
-        // urlSpan.
+    builder.setView(textView);
+    builder.setCancelable(false);
 
-      }
-
-    }
-
-    builder.setMessage(message);
     builder.setPositiveButton(safeActionText, (dialogInterface, i) -> Log.d(DEBUG_TAG, safeActionText));
 
-    // ((TextView)Alert1.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance())
-
     return builder.create();
-  }
-
-  @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    View view = super.onCreateView(inflater, container, savedInstanceState);
-
-    Log.d(DEBUG_TAG, "view-created: " + view);
-
-
-
-    return view;
   }
 
   @Override
@@ -145,9 +127,6 @@ public class AlertDialogFragment extends DialogFragment {
         .replace(SettingsParcelable.TOS_PLACEHOLDER, tosVar)
         .replace(SettingsParcelable.PP_PLACEHOLDER, ppVar);
 
-    Log.d(DEBUG_TAG, messageTemplate);
-
-    // TODO: Create urlSpans with overridden handler yourselve
     return Html.fromHtml(messageTemplate);
   }
 }
