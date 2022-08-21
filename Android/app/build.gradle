@@ -1,33 +1,28 @@
 plugins {
-    id 'com.android.application'
+  id 'com.android.application'
 }
 
 android {
-    compileSdk 33
+  compileSdk 33
 
-    defaultConfig {
-        applicationId "com.whitesharx.tosx"
-        minSdk 21
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
-    }
+  defaultConfig {
+    applicationId "com.whitesharx.tosx"
+    minSdk 21
+    targetSdk 33
+    versionCode 1
+    versionName "1.0"
+  }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
+  buildTypes {
+    release {
+      minifyEnabled false
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    buildFeatures {
+  }
 
-    }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
 }
 
-dependencies {
-
-}
+dependencies { }
