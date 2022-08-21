@@ -73,13 +73,13 @@ public class SettingsParcelable implements Parcelable {
   public static SettingsParcelable fromJson(String jsonString) throws JSONException {
     JSONObject jsonObject = new JSONObject(jsonString);
 
-    String titleText = jsonObject.getString("titleText");
-    String messageTextFormat = jsonObject.getString("messageTextFormat");
-    String termsOfServiceText = jsonObject.getString("termsOfServiceText");
-    String privacyPolicyText = jsonObject.getString("privacyPolicyText");
-    String termsOfServiceUrl = jsonObject.getString("termsOfServiceUrl");
-    String privacyPolicyUrl = jsonObject.getString("privacyPolicyUrl");
-    String actionText = jsonObject.getString("actionText");
+    String titleText = jsonObject.optString("titleText");
+    String messageTextFormat = jsonObject.optString("messageTextFormat");
+    String termsOfServiceText = jsonObject.optString("termsOfServiceText");
+    String privacyPolicyText = jsonObject.optString("privacyPolicyText");
+    String termsOfServiceUrl = jsonObject.optString("termsOfServiceUrl");
+    String privacyPolicyUrl = jsonObject.optString("privacyPolicyUrl");
+    String actionText = jsonObject.optString("actionText");
 
     return new SettingsParcelable(titleText, messageTextFormat, termsOfServiceText,
         privacyPolicyText, termsOfServiceUrl, privacyPolicyUrl, actionText);
