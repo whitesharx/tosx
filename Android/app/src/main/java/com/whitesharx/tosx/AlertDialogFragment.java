@@ -11,7 +11,6 @@ import android.text.Spanned;
 import android.text.SpannedString;
 import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.util.TypedValue;
 import android.widget.TextView;
 
@@ -54,8 +53,6 @@ public class AlertDialogFragment extends DialogFragment {
   @Override
   public Dialog onCreateDialog(Bundle bundle) {
     SettingsParcelable settings = getArguments().getParcelable(SETTINGS_EXTRA);
-    String unityObject = getArguments().getString(UNITY_OBJECT_EXTRA);
-
     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
     String titleText = settings.getTitleText();
@@ -85,7 +82,13 @@ public class AlertDialogFragment extends DialogFragment {
     builder.setView(textView);
     builder.setCancelable(false);
 
-    builder.setPositiveButton(safeActionText, (dialogInterface, i) -> Log.d(DEBUG_TAG, safeActionText));
+    builder.setPositiveButton(safeActionText, (dialogInterface, i) -> {
+      try {
+        UnityBridge.CallSafe(new ResultParcelable(ResultParcelable.ACCEPT_RESULT).toJson());
+      } catch (JSONException e) {
+        e.printStackTrace();
+      }
+    });
 
     return builder.create();
   }
@@ -93,7 +96,12 @@ public class AlertDialogFragment extends DialogFragment {
   @Override
   public void onDismiss(DialogInterface dialog) {
     super.onDismiss(dialog);
-    Log.i(DEBUG_TAG, "Dismiss");
+
+    try {
+      UnityBridge.CallSafe(new ResultParcelable(ResultParcelable.DISMISS_RESULT).toJson());
+    } catch (JSONException e) {
+      e.printStackTrace();
+    }
   }
 
   private Spanned BuildMessage(SettingsParcelable settings) {

@@ -2,8 +2,6 @@ package com.whitesharx.tosx;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Debug;
-import android.util.Log;
 
 public class MainActivity extends Activity {
   @Override
@@ -21,9 +19,5 @@ public class MainActivity extends Activity {
     AlertDialogFragment fragment = AlertDialogFragment.newInstance(settings, "FakeObject");
 
     fragment.show(getFragmentManager(), "tosx-dialog");
-
-    Log.d("Tosx", "random-log: ");
-
-
   }
 }
