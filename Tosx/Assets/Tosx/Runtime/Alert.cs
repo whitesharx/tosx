@@ -25,6 +25,7 @@ using UnityEngine;
 namespace Tosx {
   public class Alert {
     private readonly Settings settings;
+    private GameObject bridgeObject;
 
     public Alert(Settings settings) => this.settings = settings;
 
@@ -32,6 +33,14 @@ namespace Tosx {
 
     public Task DisplayAsync() {
       Debug.Log("[Alert]: DisplayAsync()");
+
+      if (null == bridgeObject) {
+        // TODO:
+      }
+
+      bridgeObject = new GameObject("TosxObject");
+      bridgeObject.AddComponent<BridgeBehaviour>();
+
 
       DisplayAndroidImpl();
 
