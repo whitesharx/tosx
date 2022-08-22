@@ -46,6 +46,11 @@ namespace Tosx {
       return alertImpl.DisplayAsync(awaitableTypes);
     }
 
+    public Task<ResultActionType> DisplayAsync() => DisplayAsync(new[] {
+        ResultActionType.Accept,
+        ResultActionType.Dismiss
+    });
+
     public void Dispose() {
       if (null == alertImpl) {
         return;

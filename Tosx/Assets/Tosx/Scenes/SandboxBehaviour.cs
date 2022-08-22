@@ -15,9 +15,15 @@ namespace Tosx.Sandbox {
       var ppUrl = "https://say.games/privacy-policy";
 
       var settings = new DisplaySettings(title, message, tosText, ppText, tosUrl, ppUrl, null);
+      using var toSx = new TosxAlert(settings);
 
-      var toSx = new TosxAlert(settings);
-      // await toSx.DisplayAsync();
+      toSx.ResultActionReceivedEvent += type => {
+        Debug.Log($"[Sandbox]: ResultActionReceivedEvent({type})");
+      };
+
+      await toSx.DisplayAsync();
+
+      Debug.Log($"[Sandbox]: Done.");
     }
   }
 }
