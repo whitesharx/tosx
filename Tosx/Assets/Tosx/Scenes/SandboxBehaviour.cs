@@ -14,10 +14,10 @@ namespace Tosx.Sandbox {
       var tosUrl = "https://say.games/terms-of-use";
       var ppUrl = "https://say.games/privacy-policy";
 
-      var settings = new Settings(title, message, tosText, ppText, tosUrl, ppUrl, null);
+      var settings = new DisplaySettings(title, message, tosText, ppText, tosUrl, ppUrl, null);
 
-      var toSx = new Alert(settings);
-      await toSx.DisplayAsync();
+      var toSx = new TosxAlert(settings);
+      // await toSx.DisplayAsync();
     }
   }
 }

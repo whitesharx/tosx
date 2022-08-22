@@ -25,7 +25,7 @@ using UnityEngine;
 
 namespace Tosx {
   [Serializable]
-  public partial class Settings {
+  public partial class DisplaySettings {
     [SerializeField]
     private string titleText;
 
@@ -47,9 +47,9 @@ namespace Tosx {
     [SerializeField]
     private string actionText;
 
-    public Settings(string titleText, string messageTextFormat,
-      string termsOfServiceText, string privacyPolicyText, string termsOfServiceUrl,
-      string privacyPolicyUrl, string actionText) {
+    public DisplaySettings(string titleText, string messageTextFormat,
+        string termsOfServiceText, string privacyPolicyText, string termsOfServiceUrl,
+        string privacyPolicyUrl, string actionText) {
       this.titleText = titleText;
       this.messageTextFormat = messageTextFormat;
       this.termsOfServiceText = termsOfServiceText;
@@ -68,11 +68,11 @@ namespace Tosx {
     public string ActionText => actionText;
   }
 
-  public partial class Settings {
-    public Settings FromJson(string jsonString) => JsonUtility.FromJson<Settings>(jsonString);
+  public partial class DisplaySettings {
+    public DisplaySettings FromJson(string jsonString) => JsonUtility.FromJson<DisplaySettings>(jsonString);
   }
 
   public static class SettingsExtensions {
-    public static string AsJson(this Settings settings) => JsonUtility.ToJson(settings);
+    public static string AsJson(this DisplaySettings displaySettings) => JsonUtility.ToJson(displaySettings);
   }
 }
