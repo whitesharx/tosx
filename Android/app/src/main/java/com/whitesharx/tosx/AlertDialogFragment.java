@@ -36,6 +36,7 @@ public class AlertDialogFragment extends DialogFragment {
     bundle.putString(UNITY_OBJECT_EXTRA, unityObject);
 
     fragment.setArguments(bundle);
+    fragment.setCancelable(false);
 
     return fragment;
   }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022 Sergey Ivonchik
+// Copyright (c) 2022 Sergey Ivonchik
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -45,8 +45,8 @@ namespace Tosx {
     public static InternalResult FromActionType(ResultActionType actionType) => actionType switch {
         ResultActionType.Accept => new InternalResult("accept"),
         ResultActionType.Dismiss => new InternalResult("dismiss"),
-        ResultActionType.TosClick => new InternalResult("tos_click"),
-        ResultActionType.PpClick => new InternalResult("pp_click"),
+        ResultActionType.TosClick => new InternalResult("view_tos"),
+        ResultActionType.PpClick => new InternalResult("view_pp"),
         _ => throw new ArgumentOutOfRangeException(nameof(actionType), actionType, null)
     };
   }
@@ -57,8 +57,8 @@ namespace Tosx {
     public static ResultActionType AsActionType(this InternalResult result) => result.Result switch {
         "accept" => ResultActionType.Accept,
         "dismiss" => ResultActionType.Dismiss,
-        "tos_click" => ResultActionType.TosClick,
-        "pp_click" => ResultActionType.PpClick,
+        "view_tos" => ResultActionType.TosClick,
+        "view_pp" => ResultActionType.PpClick,
         _ => throw new ArgumentOutOfRangeException()
     };
   }

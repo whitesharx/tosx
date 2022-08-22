@@ -7,7 +7,7 @@ import java.lang.reflect.Method;
 public class UnityBridge {
   private static final String LOG_TAG = UnityBridge.class.getName();
 
-  private static final String DEFAULT_OBJECT = "TosxObject";
+  private static final String DEFAULT_OBJECT = "TosxBridgeObject";
   private static final String DEFAULT_METHOD = "HandleNativeAndroidMessage";
 
   public static void CallSafe(String object, String method, String args) {
