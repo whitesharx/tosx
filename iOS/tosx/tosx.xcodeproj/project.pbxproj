@@ -14,6 +14,7 @@
 		331BD98D28B3AEC1003A9D0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 331BD98C28B3AEC1003A9D0A /* Assets.xcassets */; };
 		331BD99028B3AEC1003A9D0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 331BD98E28B3AEC1003A9D0A /* LaunchScreen.storyboard */; };
 		331BD99328B3AEC1003A9D0A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 331BD99228B3AEC1003A9D0A /* main.m */; };
+		331BD99C28B4E459003A9D0A /* TXResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 331BD99B28B4E459003A9D0A /* TXResult.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,8 @@
 		331BD98F28B3AEC1003A9D0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		331BD99128B3AEC1003A9D0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		331BD99228B3AEC1003A9D0A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		331BD99A28B4E459003A9D0A /* TXResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXResult.h; sourceTree = "<group>"; };
+		331BD99B28B4E459003A9D0A /* TXResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXResult.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +64,7 @@
 		331BD97F28B3AEBD003A9D0A /* tosx */ = {
 			isa = PBXGroup;
 			children = (
+				331BD99928B4E305003A9D0A /* Plugin */,
 				331BD98028B3AEBD003A9D0A /* AppDelegate.h */,
 				331BD98128B3AEBD003A9D0A /* AppDelegate.m */,
 				331BD98328B3AEBD003A9D0A /* SceneDelegate.h */,
@@ -74,6 +78,15 @@
 				331BD99228B3AEC1003A9D0A /* main.m */,
 			);
 			path = tosx;
+			sourceTree = "<group>";
+		};
+		331BD99928B4E305003A9D0A /* Plugin */ = {
+			isa = PBXGroup;
+			children = (
+				331BD99A28B4E459003A9D0A /* TXResult.h */,
+				331BD99B28B4E459003A9D0A /* TXResult.m */,
+			);
+			path = Plugin;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +161,7 @@
 			files = (
 				331BD98828B3AEBD003A9D0A /* ViewController.m in Sources */,
 				331BD98228B3AEBD003A9D0A /* AppDelegate.m in Sources */,
+				331BD99C28B4E459003A9D0A /* TXResult.m in Sources */,
 				331BD99328B3AEC1003A9D0A /* main.m in Sources */,
 				331BD98528B3AEBD003A9D0A /* SceneDelegate.m in Sources */,
 			);
