@@ -51,6 +51,7 @@ namespace Tosx {
       };
 
 #if UNITY_IOS
+      Debug.Log($"[Tosx]: DisplayAppleImpl({displaySettings.AsJson()})");
       DisplayAppleImpl(displaySettings.AsJson());
 #endif
 
