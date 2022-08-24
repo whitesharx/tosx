@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Sergey Ivonchik
+﻿// Copyright (c) 2022 Sergey Ivonchik
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,54 +18,60 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
 
-using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Tosx {
-  public class TosxAlert : IAlertImpl {
-    private readonly DisplaySettings displaySettings;
-    private readonly IAlertImpl alertImpl;
-
-    public TosxAlert(DisplaySettings displaySettings) {
-      this.displaySettings = displaySettings;
-
-#if UNITY_ANDROID
-      alertImpl = new AndroidAlertImpl(displaySettings);
-#elif UNITY_IOS
-      alertImpl = new AppleAlertImpl(displaySettings);
-#else
-      throw new NotImplementedException();
-#endif
-    }
+  public class AppleAlertImpl : IAlertImpl {
+    private const string BridgeObject = "TosxBridgeObject";
 
     public event ResultActionReceived ResultActionReceivedEvent;
 
-    public Task<ResultActionType> DisplayAsync(IEnumerable<ResultActionType> awaitableTypes) {
-      if (null == alertImpl) {
-        throw new InvalidOperationException();
-      }
+    private readonly DisplaySettings displaySettings;
+    private GameObject bridgeObject;
+    private TaskCompletionSource<ResultActionType> resultSource;
 
-      alertImpl.ResultActionReceivedEvent += OnResultReceivedImpl;
-      return alertImpl.DisplayAsync(awaitableTypes);
+    public AppleAlertImpl(DisplaySettings displaySettings) => this.displaySettings = displaySettings;
+
+    public Task<ResultActionType> DisplayAsync(IEnumerable<ResultActionType> awaitableTypes) {
+      resultSource = new TaskCompletionSource<ResultActionType>();
+
+      bridgeObject = new GameObject(BridgeObject);
+      var bridgeBehaviour = bridgeObject.AddComponent<BridgeBehaviour>();
+
+      bridgeBehaviour.ResultActionCallback = resultType => {
+        ResultActionReceivedEvent?.Invoke(resultType);
+
+        if (awaitableTypes.Any(t => t == resultType)) {
+          resultSource.TrySetResult(resultType);
+        }
+      };
+
+#if UNITY_IOS
+      DisplayAppleImpl(displaySettings.AsJson());
+#endif
+
+      return resultSource.Task;
     }
 
-    public Task<ResultActionType> DisplayAsync() => DisplayAsync(new[] {
-        ResultActionType.Accept,
-        ResultActionType.Dismiss
-    });
-
     public void Dispose() {
-      if (null == alertImpl) {
+      if (null != resultSource) {
+        resultSource.TrySetCanceled();
+        resultSource = null;
+      }
+
+      if (null == bridgeObject) {
         return;
       }
 
-      alertImpl.ResultActionReceivedEvent -= OnResultReceivedImpl;
-      alertImpl?.Dispose();
+      Object.Destroy(bridgeObject);
+      bridgeObject = null;
     }
 
-    private void OnResultReceivedImpl(ResultActionType actionType) {
-      ResultActionReceivedEvent?.Invoke(actionType);
-    }
+    [DllImport("__Internal")]
+    private static extern void DisplayAppleImpl(string displaySettingsJson);
   }
 }

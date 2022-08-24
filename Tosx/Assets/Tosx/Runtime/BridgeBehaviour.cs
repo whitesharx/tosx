@@ -8,6 +8,11 @@ namespace Tosx {
       ResultActionCallback?.Invoke(InternalResult.FromJson(args).AsActionType());
     }
 
+    private void HandleNativeAppleMessage(string args) {
+      Debug.Log($"[Tosx]: Bridge::HandleNativeAppleMessage: {args}");
+      ResultActionCallback?.Invoke(InternalResult.FromJson(args).AsActionType());
+    }
+
     public Action<ResultActionType> ResultActionCallback { get; set; }
   }
 }
