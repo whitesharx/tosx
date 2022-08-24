@@ -1,9 +1,13 @@
 #import "TXPlugin.h"
 
+#ifdef UNITY
 extern UIViewController *UnityGetGLViewController(void);
+#endif
 
 void DisplayAppleImpl(const char* displaySettingsJson) {
+#ifdef UNITY
   DisplayAppleWithControllerImpl(displaySettingsJson, UnityGetGLViewController());
+#endif
 }
 
 void DisplayAppleWithControllerImpl(const char* displaySettingsJson, UIViewController* controller) {
@@ -49,7 +53,7 @@ void DisplayAppleWithControllerImpl(const char* displaySettingsJson, UIViewContr
 void UnitySendMessageImpl(const char* resultJson) {
   NSLog(@"[Tosx]: UnitySendMessageImpl(%@)", [NSString stringWithUTF8String:resultJson]);
   
-#if UNITY
+#ifdef UNITY
   UnitySendMessage("TosxBridgeObject", "HandleNativeAppleMessage", resultJson)
 #endif
 }
