@@ -2,6 +2,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+extern NSString* const kTermsOfServicePlaceholder;
+extern NSString* const kPrivacyPolicyPlaceholder;
+
 @interface TXSettings : NSObject
 @property (nonatomic, copy, readonly) NSString *titleText;
 @property (nonatomic, copy, readonly) NSString *messageTextFormat;

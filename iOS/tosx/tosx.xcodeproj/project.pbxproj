@@ -16,6 +16,7 @@
 		331BD99328B3AEC1003A9D0A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 331BD99228B3AEC1003A9D0A /* main.m */; };
 		331BD99C28B4E459003A9D0A /* TXResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 331BD99B28B4E459003A9D0A /* TXResult.m */; };
 		331BD99F28B50527003A9D0A /* TXSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 331BD99E28B50527003A9D0A /* TXSettings.m */; };
+		33BFF65528B6516A00117EC5 /* TXPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BFF65428B6516A00117EC5 /* TXPlugin.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,8 @@
 		331BD99B28B4E459003A9D0A /* TXResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXResult.m; sourceTree = "<group>"; };
 		331BD99D28B50527003A9D0A /* TXSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXSettings.h; sourceTree = "<group>"; };
 		331BD99E28B50527003A9D0A /* TXSettings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXSettings.m; sourceTree = "<group>"; };
+		33BFF65428B6516A00117EC5 /* TXPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXPlugin.m; sourceTree = "<group>"; };
+		33BFF65628B658A300117EC5 /* TXPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXPlugin.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +93,8 @@
 				331BD99B28B4E459003A9D0A /* TXResult.m */,
 				331BD99D28B50527003A9D0A /* TXSettings.h */,
 				331BD99E28B50527003A9D0A /* TXSettings.m */,
+				33BFF65428B6516A00117EC5 /* TXPlugin.m */,
+				33BFF65628B658A300117EC5 /* TXPlugin.h */,
 			);
 			path = Plugin;
 			sourceTree = "<group>";
@@ -165,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				331BD98828B3AEBD003A9D0A /* ViewController.m in Sources */,
+				33BFF65528B6516A00117EC5 /* TXPlugin.m in Sources */,
 				331BD98228B3AEBD003A9D0A /* AppDelegate.m in Sources */,
 				331BD99F28B50527003A9D0A /* TXSettings.m in Sources */,
 				331BD99C28B4E459003A9D0A /* TXResult.m in Sources */,

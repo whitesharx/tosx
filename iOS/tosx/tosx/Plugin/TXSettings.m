@@ -1,4 +1,10 @@
+#import <UIKit/UIKit.h>
 #import "TXSettings.h"
+
+NSString* const kTermsOfServicePlaceholder = @"{_tos_var}";
+NSString* const kPrivacyPolicyPlaceholder = @"{_pp_var}";
+
+NSString* const kUrlFormat = @"<a href='%@'>%@</a>";
 
 @implementation TXSettings
 + (instancetype)settingsWithJSONString:(NSString *)aString
@@ -60,6 +66,23 @@
 }
 
 - (NSAttributedString *)renderAttributedMessageOrError:(NSError **)anError {
-  return nil;
+  NSString* tosText = [NSString stringWithFormat:kUrlFormat, self.termsOfServiceUrl, self.termsOfServiceText];
+  NSString* ppText = [NSString stringWithFormat:kUrlFormat, self.privacyPolicyUrl, self.privacyPolicyText];
+  
+  NSString* resultHtml = [[self.messageTextFormat stringByReplacingOccurrencesOfString:kTermsOfServicePlaceholder withString:tosText]
+                                                  stringByReplacingOccurrencesOfString:kPrivacyPolicyPlaceholder withString:ppText];
+  
+  NSData* htmlData = [resultHtml dataUsingEncoding:NSUTF8StringEncoding];
+  NSDictionary<NSAttributedStringDocumentReadingOptionKey, id> *opts = nil;
+  
+  opts = @{
+    NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+    NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)
+  };
+  
+  return [[NSAttributedString alloc] initWithData:htmlData
+                                          options:opts
+                               documentAttributes:nil
+                                            error:nil];
 }
 @end

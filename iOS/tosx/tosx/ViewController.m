@@ -1,6 +1,5 @@
 #import "ViewController.h"
-
-#import "Plugin/TXResult.h"
+#import "Plugin/TXPlugin.h"
 
 @interface ViewController ()
 @end
@@ -13,61 +12,23 @@
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
   
-//  NSLog(@"viewDidAppeer");
-//
-//  NSMutableAttributedString* str = nil;
-//  str = [[NSMutableAttributedString alloc] initWithString:@"Google"];
-//
-//  [str addAttribute:NSLinkAttributeName
-//              value: @"http://www.google.com"
-//              range: NSMakeRange(0, str.length)];
-//
-//
-//  UIAlertController* alert = nil;
-//  alert = [UIAlertController alertControllerWithTitle:@"Warning!"
-//                                              message:@"This is an alert."
-//                                       preferredStyle:UIAlertControllerStyleAlert];
-//
-//  [alert setValue:str forKey:@"attributedMessage"];
-//
-//  UIAlertAction* action = nil;
-//  action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-//                                         handler:^(UIAlertAction * action) {}];
-//
-//  UITapGestureRecognizer* recognizer = nil;
-//  recognizer = [recognizer initWithTarget:self action:@selector(didTapOnText:)];
-//
-//
-//
-//  [alert addAction:action];
-//
-//  [self presentViewController:alert animated:YES completion:nil];
+  NSString* title = @"Warning!";
+  NSString* message = @"By tapping \"OK\" you accept our {_tos_var} and confirm that you've read {_pp_var}.";
+  NSString* tosText = @"Terms of Service";
+  NSString* ppText = @"Privacy Policy";
+  NSString* tosUrl = @"https://say.games/terms-of-use";
+  NSString* ppUrl = @"https://say.games/privacy-policy";
   
- //  [self displayAlertWithCustomTextView];
+  TXSettings* settings = [[TXSettings alloc] initWithTitleText:title
+                                             messageTextFormat:message
+                                            termsOfServiceText:tosText
+                                             privacyPolicyText:ppText
+                                             termsOfServiceUrl:tosUrl
+                                              privacyPolicyUrl:ppUrl
+                                                    actionText:@"Ok"];
   
-  [self runSomeTests];
-}
-
-- (void)runSomeTests {
-  NSError *error = nil;
-  TXResult *result = [[TXResult alloc] initWithResult:kAcceptResultType];
-  
-  NSLog(@"resultObject.accept: %@", result.result);
-  
-  NSString *resultJson = [result asJSONStringOrError:&error];
-  
-  NSLog(@"resultJson: %@", resultJson);
-  
-  NSString *invalidJson = @"invalid json";
-  
-  TXResult *newResult = [TXResult resultWithJSONString:resultJson error:&error];
-  
-  if (error) {
-    NSLog(@"error: %@", error);
-    return;
-  }
-  
-  NSLog(@"parsed-result: %@", newResult.result);
+  NSString* settingsJson = [settings asJSONStringOrError:nil];
+  DisplayAppleWithControllerImpl([settingsJson cStringUsingEncoding:NSUTF8StringEncoding], self);
 }
 
 - (void)displayAlertWithCustomTextView {
@@ -92,9 +53,7 @@
   [viewController.view addSubview:textView];
   
   [alert setValue:viewController forKey:@"contentViewController"];
-  
-  
-  
+
   [self presentViewController:alert animated:YES completion:nil];
 }
 
