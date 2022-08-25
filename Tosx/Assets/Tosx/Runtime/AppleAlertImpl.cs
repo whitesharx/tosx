@@ -20,7 +20,6 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -72,7 +71,9 @@ namespace Tosx {
       bridgeObject = null;
     }
 
+#if UNITY_IOS
     [DllImport("__Internal")]
     private static extern void DisplayAppleImpl(string displaySettingsJson);
+#endif
   }
 }
