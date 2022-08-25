@@ -23,6 +23,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
+#if UNITY_IOS
+using System.Runtime.InteropServices;
+#endif
+
 namespace Tosx {
   public class AppleAlertImpl : IAlertImpl {
     private const string BridgeObject = "TosxBridgeObject";
