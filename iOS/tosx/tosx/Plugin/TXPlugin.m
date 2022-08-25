@@ -52,7 +52,8 @@ void DisplayAppleWithControllerImpl(const char* displaySettingsJson, UIViewContr
   textView.textContainerInset = UIEdgeInsetsMake(4, 8, 4, 8);
   textView.scrollEnabled = false;
   textView.userInteractionEnabled = true;
-  textView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+  textView.textColor = [UIColor labelColor];
+  textView.backgroundColor = [UIColor clearColor];
   textView.dataDetectorTypes = UIDataDetectorTypeLink;
   textView.editable = false;
   textView.selectable = true;
