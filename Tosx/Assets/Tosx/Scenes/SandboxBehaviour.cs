@@ -13,8 +13,9 @@ namespace Tosx.Sandbox {
       var ppText = "Privacy Policy";
       var tosUrl = "https://say.games/terms-of-use";
       var ppUrl = "https://say.games/privacy-policy";
+      var actionTitle = "OK";
 
-      var settings = new DisplaySettings(title, message, tosText, ppText, tosUrl, ppUrl, null);
+      var settings = new DisplaySettings(title, message, tosText, ppText, tosUrl, ppUrl, actionTitle);
       using var toSx = new TosxAlert(settings);
 
       toSx.ResultActionReceivedEvent += type => {

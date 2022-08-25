@@ -66,23 +66,22 @@ NSString* const kUrlFormat = @"<a href='%@'>%@</a>";
 }
 
 - (NSAttributedString *)renderAttributedMessageOrError:(NSError **)anError {
-  NSString* tosText = [NSString stringWithFormat:kUrlFormat, self.termsOfServiceUrl, self.termsOfServiceText];
-  NSString* ppText = [NSString stringWithFormat:kUrlFormat, self.privacyPolicyUrl, self.privacyPolicyText];
+  NSString* resultMessage = [[self.messageTextFormat stringByReplacingOccurrencesOfString:kTermsOfServicePlaceholder withString:self.termsOfServiceText]
+                                                     stringByReplacingOccurrencesOfString:kPrivacyPolicyPlaceholder withString:self.privacyPolicyText];
   
-  NSString* resultHtml = [[self.messageTextFormat stringByReplacingOccurrencesOfString:kTermsOfServicePlaceholder withString:tosText]
-                                                  stringByReplacingOccurrencesOfString:kPrivacyPolicyPlaceholder withString:ppText];
+  NSRange termsOfServiceRange = [resultMessage rangeOfString:self.termsOfServiceText];
+  NSRange privacyPolicyRage = [resultMessage rangeOfString:self.privacyPolicyText];
   
-  NSData* htmlData = [resultHtml dataUsingEncoding:NSUTF8StringEncoding];
-  NSDictionary<NSAttributedStringDocumentReadingOptionKey, id> *opts = nil;
+  NSMutableAttributedString *resultString = [[NSMutableAttributedString alloc] initWithString:resultMessage];
   
-  opts = @{
-    NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
-    NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)
-  };
+  [resultString addAttribute:NSLinkAttributeName
+                       value:self.termsOfServiceUrl
+                       range:termsOfServiceRange];
   
-  return [[NSAttributedString alloc] initWithData:htmlData
-                                          options:opts
-                               documentAttributes:nil
-                                            error:nil];
+  [resultString addAttribute:NSLinkAttributeName
+                       value:self.privacyPolicyUrl
+                       range:privacyPolicyRage];
+  
+  return resultString;
 }
 @end

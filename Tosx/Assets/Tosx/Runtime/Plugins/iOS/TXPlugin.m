@@ -45,8 +45,26 @@ void DisplayAppleWithControllerImpl(const char* displaySettingsJson, UIViewContr
   }];
 
   [alert addAction:action];
-  [alert setValue:message forKey:@"attributedMessage"];
   
+  UITextView* textView = [[UITextView alloc] init];
+  textView.attributedText = message;
+  textView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+  textView.textContainerInset = UIEdgeInsetsMake(4, 8, 4, 8);
+  textView.scrollEnabled = false;
+  textView.userInteractionEnabled = true;
+  textView.textColor = [UIColor labelColor];
+  textView.backgroundColor = [UIColor clearColor];
+  textView.dataDetectorTypes = UIDataDetectorTypeLink;
+  textView.editable = false;
+  textView.selectable = true;
+  textView.textAlignment = NSTextAlignmentCenter;
+  textView.font = [UIFont systemFontOfSize:[UIFont labelFontSize]];
+  
+  UIViewController* viewController = [[UIViewController alloc] init];
+  textView.frame = viewController.view.frame;
+  
+  [viewController.view addSubview:textView];
+  [alert setValue:viewController forKey:@"contentViewController"];
   [controller presentViewController:alert animated:YES completion:nil];
 }
 

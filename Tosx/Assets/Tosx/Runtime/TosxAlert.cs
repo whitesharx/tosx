@@ -30,10 +30,12 @@ namespace Tosx {
     public TosxAlert(DisplaySettings displaySettings) {
       this.displaySettings = displaySettings;
 
-#if UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
       alertImpl = new AndroidAlertImpl(displaySettings);
-#elif UNITY_IOS
+#elif UNITY_IOS && !UNITY_EDITOR
       alertImpl = new AppleAlertImpl(displaySettings);
+#elif UNITY_EDITOR
+      alertImpl = new EditorAlertImpl(displaySettings);
 #else
       throw new NotImplementedException();
 #endif
