@@ -49,7 +49,6 @@ void DisplayAppleWithControllerImpl(const char* displaySettingsJson, UIViewContr
   UITextView* textView = [[UITextView alloc] init];
   textView.attributedText = message;
   textView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-  textView.textContainerInset = UIEdgeInsetsMake(4, 8, 4, 8);
   textView.scrollEnabled = false;
   textView.userInteractionEnabled = true;
   textView.textColor = [UIColor labelColor];
@@ -58,7 +57,7 @@ void DisplayAppleWithControllerImpl(const char* displaySettingsJson, UIViewContr
   textView.editable = false;
   textView.selectable = true;
   textView.textAlignment = NSTextAlignmentCenter;
-  textView.font = [UIFont systemFontOfSize:[UIFont labelFontSize]];
+  textView.font = [UIFont systemFontOfSize:13.0f];
   
   UIViewController* viewController = [[UIViewController alloc] init];
   textView.frame = viewController.view.frame;
