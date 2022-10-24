@@ -51,13 +51,18 @@ void DisplayAppleWithControllerImpl(const char* displaySettingsJson, UIViewContr
   textView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
   textView.scrollEnabled = false;
   textView.userInteractionEnabled = true;
-  textView.textColor = [UIColor labelColor];
   textView.backgroundColor = [UIColor clearColor];
   textView.dataDetectorTypes = UIDataDetectorTypeLink;
   textView.editable = false;
   textView.selectable = true;
   textView.textAlignment = NSTextAlignmentCenter;
   textView.font = [UIFont systemFontOfSize:13.0f];
+  
+  if ([[UIDevice currentDevice] systemVersion].floatValue >= 13.0) {
+    textView.textColor = [UIColor labelColor];
+  } else {
+    textView.textColor = [UIColor blackColor];
+  }
   
   UIViewController* viewController = [[UIViewController alloc] init];
   textView.frame = viewController.view.frame;
