@@ -48,7 +48,7 @@ await toSx.DisplayAsync();
 
 # License
 
-Httx is available under the [MIT](https://en.wikipedia.org/wiki/MIT_License) license.
+ToSx is available under the [MIT](https://en.wikipedia.org/wiki/MIT_License) license.
 
 <p align="center">
   Made with 🖤 at <a aria-label="WhiteSharx" href="https://whitesharx.com">WhiteSharx</a>
